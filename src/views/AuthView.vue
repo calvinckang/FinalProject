@@ -1,5 +1,5 @@
 <template>
-    <h1>Auth View</h1>
+    <h3>Auth View</h3>
     <RouterView />
 </template>
 

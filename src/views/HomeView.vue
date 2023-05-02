@@ -6,6 +6,6 @@ export default {
 
 <template>
   <main>
-    <h1>Home View</h1>
+    <h2>Home View</h2>
   </main>
 </template>
