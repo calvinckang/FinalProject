@@ -1,21 +1,48 @@
 <template>
     <h2>Sign In</h2>
-    <form action="">
+    <form>
         <div>
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <input v-model="email" type="email" placeholder="Enter your email" required />
         </div>
         <div>
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input v-model="password" type="password" placeholder="Enter your password" required />
         </div>
-        <button>Sign In</button>
+        <button type="button" @click="handleSignIn">Sign In</button>
     </form>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia';
+import userStore from '@/stores/user';
+
 export default {
-    name: 'SignInView'
+    name: 'SignInView',
+    data() {
+        return {
+            email: '',
+            password: '',
+        }
+    },
+    computed: {
+        ...mapState(userStore, ['user']),
+    },
+    methods: {
+        ...mapActions(userStore, ['signIn']),
+        async handleSignIn() {
+            try {
+                const userData = {
+                email: this.email,
+                password: this.password,
+                };
+                await this.signIn(userData);
+                this.$router.push({ name: 'home' })
+            } catch(err) {
+                console.error(err)
+            }
+        },
+    },
 }
 </script>
 

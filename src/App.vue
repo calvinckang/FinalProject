@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 import { RouterLink, RouterView } from 'vue-router'
 import { mapActions } from 'pinia';
 import UserStore from '@/stores/user.js';
@@ -16,11 +16,12 @@ export default {
     await this.fetchUser()
   }
 }
-</script>
+</script> -->
 
 <template>
   <div class="container">
     <header>
+      <span>✏️</span>
       <h1>To Do List</h1>
       <div class="wrapper">
         <nav>
@@ -43,17 +44,19 @@ export default {
 }
 
 header {
-  line-height: 1.5;
-  max-height: 100vh;
   text-align: center;
-  margin: 16px auto 64px auto;
+  margin: 16px auto 80px auto;
+}
+
+span {
+  font-size: 48px;
 }
 
 nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 24px;
+  margin-top: 12px;
 }
 
 nav a {

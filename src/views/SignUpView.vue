@@ -3,40 +3,53 @@
     <form>
         <div>
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <input v-model="email" type="email" placeholder="Enter your email" required />
         </div>
         <div>
             <label>Password</label>
-            <input type="password" placeholder="Create password" required />
+            <input v-model="password" type="password" placeholder="Create password" required />
         </div>
         <div>
             <label>Confirm Password</label>
             <input type="password" placeholder="Retype password" required />
         </div>
-        <button>Sign Up</button>
+        <button type="button" @click="handleSignUp">Sign Up</button>
     </form>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia';
+import userStore from '@/stores/user';
+
 export default {
-    name: 'SignUpView'
+    name: 'SignUpView',
+    data() {
+        return {
+            email: '',
+            password: '',
+        }
+    },
+    computed: {
+        ...mapState(userStore, ['user']),
+    },
+    methods: {
+        ...mapActions(userStore, ['signUp']),
+        async handleSignUp() {
+            try {
+                const userData = {
+                email: this.email,
+                password: this.password,
+                };
+                await this.signUp(userData);
+                this.$router.push({ name: 'home' })
+            } catch(err) {
+                console.error(err)
+            }
+        },
+    },
 }
 </script>
 
 <style>
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 24px auto;
-}
 
-form div {
-    display: flex;
-    flex-direction: column;
-}
-
-button {
-    margin-top: 12px;
-}
 </style>
